@@ -2,6 +2,7 @@ package collection;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /*
@@ -56,9 +57,7 @@ class User{
 	}
 }
 
-
 public class homework {
-
 	public static void main(String[] args) {
 		Scanner in =  new Scanner(System.in);
 		//创建user集合保存用户的账号密码
@@ -72,50 +71,86 @@ public class homework {
 	
 		//equalsIgnoreCase() 方法用于将字符串与指定的对象比较，不考虑大小写。
 		//如果给定对象与字符串相等，则返回 true；否则返回 false。
-		
-		//注册功能
 		if("a".equalsIgnoreCase(choose))
 		{
-			User u = null;
-			System.out.println("你选择了注册功能！");
-			//判断账号id是否存在
-			while(true)
-			{
-			System.out.println("请输入账号：");
-			int id = in.nextInt();
-			 u = new User(id,null);
-			if(user.contains(u)){
-				System.out.println("该id已经存在，请重新输入！");
-			}
-			else {
-				break;
-			}
-			}
-				System.out.println("请输入密码：");
-				String password = in.next();
-				u.setPassword(password);
-				//把user对象保存到集合中
-				user.add(u);
-				System.out.println("注册成功!");
-				System.out.println("当前注册的人员："+u);
-				System.out.println("已经注册了的人员："+user);		
+			register(in, user);
+				
 		}
-		//登录功能
+		
 	
 		else if("B".equalsIgnoreCase(choose))
 		{
-			System.out.println("这是登录！");
+			login(in, user);
 		}
+		
 		else
 			System.out.println("选择有误，请重新输入。");
 		}
-		
-		
-		
-		
-		
-		
 
+	}
+	
+	
+	//登录功能
+	public static void login(Scanner in, Collection user) {
+		//提示输入账号密码
+		System.out.println("你选择了登录功能！");
+		System.out.println("请输入账号：");
+		int id  = in.nextInt();
+		System.out.println("请输入密码：");
+		String passward = in.next();
+		//判断集合的用户是否存在该用户名与密码
+		//遍历集合的元素，查看是否存在该用户信息
+		
+		//定义变量用于记录是否登陆成功的信息  , 默认是没有登陆成功的
+		
+		boolean isLogin = false; 	
+		
+		Iterator it = user.iterator();
+		//使用迭代器遍历
+		while(it.hasNext())
+		{
+			User u = (User) it.next();
+			//比较账号密码是否一致
+			if((u.id==id)&&(u.password.equals(passward)))
+			{
+				isLogin = true;	
+			}
+		}
+		
+		if(isLogin)
+		{
+			System.out.println("登录成功！");
+			System.out.println("已经注册了的人员："+user);		
+			
+		}
+		else
+		System.out.println("账号密码有误，请重新输入！");
+	}
+	
+	//注册功能
+	public static void register(Scanner in, Collection user) {
+		User u = null;
+		System.out.println("你选择了注册功能！");
+		//判断账号id是否存在
+		while(true)
+		{
+		System.out.println("请输入账号：");
+		int id = in.nextInt();
+		 u = new User(id,null);
+		if(user.contains(u)){
+			System.out.println("该id已经存在，请重新输入！");
+		}
+		else {
+			break;
+		}
+		}
+			System.out.println("请输入密码：");
+			String password = in.next();
+			u.setPassword(password);
+			//把user对象保存到集合中
+			user.add(u);
+			System.out.println("注册成功!");
+			System.out.println("当前注册的人员："+u);
 	}
 
 }
