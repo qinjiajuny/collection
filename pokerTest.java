@@ -53,7 +53,7 @@ public class pokerTest {
 		for(int i = 0;i<color.length;i++)
 		{
 			for(int j =0;j<num.length;j++)
-			{
+			{	
 				list.add(new Poker(color[i],num[j])); 
 			}
 		}
@@ -72,7 +72,7 @@ public class pokerTest {
 			System.out.println();
 		}
 	}
-	//洗牌
+	//洗牌，在此值传递的是同一个对象
 	public static void sufflePoker(LinkedList poker)
 	{
 		//创建随机数对象
