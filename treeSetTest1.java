@@ -54,7 +54,8 @@ public class treeSetTest1 {
 		tree.add(new Employee(02,"李四",1500));
 		tree.add(new Employee(03,"王五",800));
 		tree.add(new Employee(04,"赵六",850));
-		tree.add(new Employee(05,"赵六2",850));
+		//此时compareTo返回的是0 将该对象视为重复元素，不添加进TreeSet
+		//tree.add(new Employee(05,"赵六2",850));
 		//tree.add(new Employee(05,"赵六",870));
 		System.out.println(tree);
 		
